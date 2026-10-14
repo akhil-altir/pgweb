@@ -1,0 +1,19 @@
+version: 1
+
+name: pgweb
+description: Browse and query your own Postgres in the browser, from the open-source pgweb project.
+icon: Database
+tags: [data, code]
+
+containers:
+  web:
+    type: web
+    image: sosedoff/pgweb:0.17.0
+    user: 1000
+    port: 8081
+    health: /api/info
+    uses: [postgres]
+    resources:
+      memory: 128Mi
+    env:
+      PGWEB_DATABASE_URL: $(POSTGRES_URL)?sslmode=disable
